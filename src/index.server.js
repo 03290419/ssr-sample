@@ -5,10 +5,9 @@ import path from 'path';
 import App from './App';
 import fs from 'fs';
 import { createStore, applyMiddleware } from 'redux';
-import { Provider, Provieder } from 'react-redux';
-import { applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import rootReducer from './modules/index';
-import PreloaderContext from './libs/PreloadContext';
+import PreloaderContext, { Preloader } from './libs/PreloadContext';
 
 const manifest = JSON.parse(
     fs.readFileSync(path.resolve('./build/asset-manifest.json'), 'utf8')
