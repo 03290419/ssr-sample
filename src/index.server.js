@@ -8,6 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './modules/index';
 import PreloaderContext, { Preloader } from './libs/PreloadContext';
+import thunk from 'redux-thunk';
 
 const manifest = JSON.parse(
     fs.readFileSync(path.resolve('./build/asset-manifest.json'), 'utf8')
@@ -62,7 +63,7 @@ const serverRender = async (req, res, next) => {
 
     const root = ReactDOMServer.renderToString(jsx); //렌더링을 하고 클라이언트에게 결과물을 응답한다.
     // JSON 파일을 문자열로 변환하고 악성 스크립트가 실행되는 것을 방지하기 위해 <를 치환 처리
-    const stateString = JSON.stringify(store.getState()).require(
+    const stateString = JSON.stringify(store.getState()).replace(
         /</g,
         '\\u003c'
     );
